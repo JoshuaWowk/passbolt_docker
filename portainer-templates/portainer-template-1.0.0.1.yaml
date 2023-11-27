@@ -12,8 +12,8 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     hostname: passbolt-db
-    networks:
-    - docker_bridge
+    # networks:
+    # - docker_bridge
     restart: unless-stopped
     volumes:
     - /portainer/Files/AppData/Config/passbolt-02/db:/config
@@ -39,8 +39,8 @@ services:
       EMAIL_TRANSPORT_DEFAULT_TLS: ${EMAIL_TLS}
     hostname: passbolt
 
-    networks:
-    - docker_bridge
+    # networks:
+    # - docker_bridge
     ports:
     #  - 80:80
     - ${PASSBOLT_PORT}:443
@@ -51,11 +51,11 @@ services:
     - gpg:/etc/passbolt-02/gpg
     - jwt:/etc/passbolt-02/jwt
 
-networks:
-  docker_bridge:
-    name: bridge
-    external: true
-    # this was 'Passbolt_default', changed to bridge.
+# networks:
+#   docker_bridge:
+#     name: bridge
+#     external: true
+#     # this was 'Passbolt_default', changed to bridge.
 volumes:
   gpg:
   jwt:
