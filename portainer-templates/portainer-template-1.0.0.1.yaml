@@ -10,8 +10,8 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     hostname: passbolt-db
-    # the image was 'linuxserver/mariadb:armxx64-latest' or similar, changed to amd64.
     image: linuxserver/mariadb:amd64-latest
+    # the image was 'linuxserver/mariadb:armxx64-latest' or similar, changed to amd64.
     networks:
     - passbolt_default
     restart: unless-stopped
@@ -54,7 +54,7 @@ networks:
   docker_bridge:
     name: bridge
     external: true
-
+    # this was 'Passbolt_default', changed to bridge.
 volumes:
   gpg:
   jwt:
