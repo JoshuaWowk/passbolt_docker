@@ -46,7 +46,7 @@ services:
     - ${PASSBOLT_PORT}:443
     restart: unless-stopped
     volumes:
-    - /portainer/Files/AppData/Config/passbolt-02/certs:/etc/ssl/certs:ro
+    - /portainer/Files/AppData/Config/passbolt-02/certs:/etc/ssl/certs:rw
     # - /portainer/Files/AppData/Config/passbolt-02/certs/cert.pem:/etc/ssl/certs/certificate.crt:ro
     # - /portainer/Files/AppData/Config/passbolt-02/certs/key.pem:/etc/ssl/certs/certificate.key:ro
     # changed the above volumes to instead point to a directory instead of a file.
