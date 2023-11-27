@@ -13,7 +13,7 @@ services:
     image: linuxserver/mariadb:amd64-latest
     # the image was 'linuxserver/mariadb:armxx64-latest' or similar, changed to amd64.
     networks:
-    - passbolt_default
+    - docker_bridge
     restart: unless-stopped
     volumes:
     - /portainer/Files/AppData/Config/passbolt/db:/config
@@ -39,7 +39,7 @@ services:
     hostname: passbolt
     image: passbolt/passbolt:latest-ce
     networks:
-    - passbolt_default
+    - docker_bridge
     ports:
     #  - 80:80
     - ${PASSBOLT_PORT}:443
