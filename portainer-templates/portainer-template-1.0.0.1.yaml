@@ -1,6 +1,8 @@
 version: "3.9"
 services:
   passbolt-db:
+    image: linuxserver/mariadb:amd64-latest
+    # the image was 'linuxserver/mariadb:armxx64-latest' or similar, changed to amd64.
     container_name: passbolt-db
     environment:
       PUID: ${PUID}
@@ -10,15 +12,14 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     hostname: passbolt-db
-    image: linuxserver/mariadb:amd64-latest
-    # the image was 'linuxserver/mariadb:armxx64-latest' or similar, changed to amd64.
     networks:
     - docker_bridge
     restart: unless-stopped
     volumes:
-    - /portainer/Files/AppData/Config/passbolt/db:/config
+    - /portainer/Files/AppData/Config/passbolt-02/db:/config
 
   passbolt:
+    image: passbolt/passbolt:latest-ce
     container_name: passbolt
     command: ["/usr/bin/wait-for.sh", "-t", "0", "passbolt-db:3306", "--", "/docker-entrypoint.sh"]
     depends_on:
@@ -37,7 +38,7 @@ services:
       EMAIL_TRANSPORT_DEFAULT_PASSWORD: ${EMAIL_PASSWORD}
       EMAIL_TRANSPORT_DEFAULT_TLS: ${EMAIL_TLS}
     hostname: passbolt
-    image: passbolt/passbolt:latest-ce
+
     networks:
     - docker_bridge
     ports:
@@ -45,10 +46,10 @@ services:
     - ${PASSBOLT_PORT}:443
     restart: unless-stopped
     volumes:
-    - /portainer/Files/AppData/Config/passbolt/certs/cert.pem:/etc/ssl/certs/certificate.crt:ro
-    - /portainer/Files/AppData/Config/passbolt/certs/key.pem:/etc/ssl/certs/certificate.key:ro
-    - gpg:/etc/passbolt/gpg
-    - jwt:/etc/passbolt/jwt
+    - /portainer/Files/AppData/Config/passbolt-02/certs/cert.pem:/etc/ssl/certs/certificate.crt:ro
+    - /portainer/Files/AppData/Config/passbolt-02/certs/key.pem:/etc/ssl/certs/certificate.key:ro
+    - gpg:/etc/passbolt-02/gpg
+    - jwt:/etc/passbolt-02/jwt
 
 networks:
   docker_bridge:
